@@ -76,6 +76,30 @@ const connectDb = async () => {
   
   connectDb().catch(error => console.error(error))
 
+//Used for Jsonwebtoken (in login)
+const passport = require('passport');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+
+//session allows to store data such as user data
+let session = require('express-session');
+
+//sessions are stored into MongoDB
+let MongoStore = require('connect-mongo')(session);
+
+// Passport Setup
+const User = require('./model/users');
+
+//setting session
+app.use(session({
+
+  resave: true,
+  saveUninitialized: true,
+  secret: 'mySecretKey',
+  store: new MongoStore({ url: 'mongodb://localhost:27017/auth', autoReconnect: true})
+
+}));
+
 //Accessing the routes for the Calls
 const callRoutes = require('./route/calls');
 

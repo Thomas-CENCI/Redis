@@ -64,25 +64,23 @@ function deleteUser(req, res) {
  const jwt = require('jsonwebtoken');
 
  function createToken(user) {
-     return jwt.sign({id: user.id, username: user.email}, "My so secret sentence");
+     return jwt.sign({id: user.id, email: user.email}, "My so secret sentence");
  }
  
  function signin(req, res) {
  
      let User = require('../model/users');
+     const email = req.body.email
  
-     User.findOne({username: req.body.username}, function(err, user) {
-         if (err)
-             throw err;
- 
+     User.findOne({email: email}, function(err, user) {
+
          if (user.comparePassword(req.body.pswd)) {
-             req.session.username = req.body.username;
              req.session.logged = true;
-             var t = createToken(user);
              res.status(200).json({token: createToken(user)});
          }
-         else
-             res.redirect('/');
+         else {
+             res.status(400).json();
+         }
      });
  }
  
@@ -91,25 +89,24 @@ function deleteUser(req, res) {
      let User = require('../model/users');
      let user = new User();
  
-     user.username = req.body.username;
+     user.email = req.body.email;
      user.pswd = req.body.pswd;
  
      user.save((err, savedUser) => {
  
-         if (err)
-             throw err;
- 
-         res.redirect('/');
- 
+         if (err){
+            res.status(400).json()
+         }
+         else {
+            res.status(200).json()
+         }
      });
  }
  
  function signout(req, res) {
  
-     req.session.username = "";
-     req.session.logged = false;
-     res.redirect("/");
- 
+     req.session.email = "";
+     req.session.logged = false; 
  }
  
  function profile(req, res) {

@@ -235,3 +235,8 @@ Tue, 26 Jan 2021 09:24:10 GMT | ERROR  | HTTP 404: ask for:  http://localhost:30
 Tue, 26 Jan 2021 09:25:10 GMT | ERROR  | HTTP 404: ask for:  http://localhost:3000/api/v1/updateUser/600fda56737f593ddc30fd09?firstName=Jean&lastName=Dupont&email=jd@mail.com&pswd=password
 Tue, 26 Jan 2021 09:26:12 GMT | ERROR  | HTTP 404: ask for:  http://localhost:3000/api/v1/updateUser/600fda56737f593ddc30fd09
 Tue, 26 Jan 2021 09:26:28 GMT | ERROR  | HTTP 404: ask for:  http://localhost:3000/api/v1/updateUser/600fda56737f593ddc30fd09
+Tue, 26 Jan 2021 10:01:19 GMT | ERROR  | HTTP 404: ask for:  http://localhost:3000/
+Tue, 26 Jan 2021 10:01:36 GMT | ERROR  | HTTP 404: ask for:  http://localhost:3000/
+Tue, 26 Jan 2021 10:01:52 GMT | ERROR  | HTTP 404: ask for:  http://localhost:3000/
+Tue, 26 Jan 2021 10:09:25 GMT | ERROR  | HTTP 404: ask for:  http://localhost:3000/
+Tue, 26 Jan 2021 10:15:02 GMT | ERROR  | HTTP 404: ask for:  http://localhost:3000/
