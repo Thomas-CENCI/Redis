@@ -1,5 +1,5 @@
 {
-  "name": "redis",
+  "name": "TP1",
   "version": "1.0.0",
   "description": "Vous venez d’être recruté pour faire une mission auprès d’une startup qui propose ses données sous la forme d’un Software as a Service.",
   "main": "index.js",
@@ -28,6 +28,7 @@
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "redis": "^3.0.2",
     "winston": "^3.3.3"
   }
 }
