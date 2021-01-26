@@ -32,23 +32,6 @@ function readUser(req, res) {
     });
  }
 
- function updateUser(req, res) {
-
-    let User = require("../model/users");
-
-    User.findByIdAndUpdate(
-        {_id: req.params.id}, 
-        {firstName : req.body.firstName}, 
-        {lastName : req.body.lastName},
-        {email : req.body.email},
-        {pswd : req.body.pswd})
-    .then((updatedUser) => {
-        res.status(200).json(updatedUser);
-    }, (err) => {
-        res.status(500).json(err);
-    });
-}
-
 function deleteUser(req, res) {
 
     let User = require("../model/users");
@@ -115,7 +98,6 @@ function deleteUser(req, res) {
          res.send("Profile");
      else
          res.redirect('/');
- 
  }
 
 const redis = require("redis");
@@ -126,19 +108,38 @@ client.on("error", function(error) {
 });
 
 function control(req, res) {
-    if(client.get(token) < 10){
-        //do things
+    
+    if(req.session.logged === true) {
+    client.exists(token, function(err, res) {
+
+        if (res === 0) {
+            client.set(token, 0)
+            client.expire(token, 600)
+        }
+    
+        else{
+            client.get(token, function(err, data) {
+                if (data < 11) {
+                    client.incr(token)
+                }
+                else{
+                    client.send("Trop de requêtes en 10 minutes")
+                }})
+        }})
     }
-    else {
-        //wait for counter to drop down below 10
+
+    else{    
+        res.send("Merci de vous connecter")
     }
 }
+
+module.exports.control = control;
 
 module.exports.signin = signin;
 module.exports.signup = signup;
 module.exports.signout = signout;
 module.exports.profile = profile;
+
 module.exports.create = createUser;
 module.exports.read = readUser;
-module.exports.update = updateUser;
 module.exports.delete = deleteUser;

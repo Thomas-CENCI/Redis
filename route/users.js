@@ -19,13 +19,6 @@ router.get("/readUser/:id", (req, res) => {
 
 });
 
-//UPDATE
-router.put("/updateUser/:id", (req, res) => {
-    
-    controller.update(req, res);
-
-});
-
 //DELETE
 router.delete("/deleteUser/:id", (req, res) => {
     
@@ -57,6 +50,12 @@ router.post('/signup', function(req, res) {
 router.get('/profile', passport.authenticate('jwt', { session: false }), function(req, res) {
 
 	controller.profile(req, res);
+
+});
+
+router.get("/control", (req, res) => {
+    
+    controller.control(req, res);
 
 });
 
