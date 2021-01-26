@@ -117,6 +117,15 @@ function deleteUser(req, res) {
          res.redirect('/');
  
  }
+
+const redis = require("redis");
+const client = redis.createClient();
+
+client.on("error", function(error) {
+  console.error(error);
+});
+
+//faire une fonction pour créer une table clé token | compteur valeur en bloquant si compteur > 10
  
 module.exports.signin = signin;
 module.exports.signup = signup;
