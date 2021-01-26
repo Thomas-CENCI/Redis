@@ -125,8 +125,15 @@ client.on("error", function(error) {
   console.error(error);
 });
 
-//faire une fonction pour créer une table clé token | compteur valeur en bloquant si compteur > 10
- 
+function control(req, res) {
+    if(client.get(token) < 10){
+        //do things
+    }
+    else {
+        //wait for counter to drop down below 10
+    }
+}
+
 module.exports.signin = signin;
 module.exports.signup = signup;
 module.exports.signout = signout;
